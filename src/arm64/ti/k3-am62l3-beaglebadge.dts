@@ -107,32 +107,34 @@
 };
 
 &pmx0 {
-	main_uart0_tx_pins_default: main-uart0-tx-default-pins {
+	main_uart0_pins_default: main-uart0-default-pins {
 		pinctrl-single,pins = <
+			AM62LX_IOPAD(0x01b4, PIN_INPUT, 0)	/* (D13) UART0_RXD */
 			AM62LX_IOPAD(0x01b8, PIN_OUTPUT, 0)	/* (C13) UART0_TXD */
 		>;
 		bootph-all;
 	};
 
-	main_uart0_rx_pins_default: main-uart0-rx-default-pins {
+	main_uart1_pins_default: main-uart1-default-pins {
 		pinctrl-single,pins = <
-			AM62LX_IOPAD(0x01b4, PIN_INPUT, 0)	/* (D13) UART0_RXD */
+			AM62LX_IOPAD(0x0198, PIN_INPUT, 2)	/* (C11) UART1_RXD */
+			AM62LX_IOPAD(0x019c, PIN_OUTPUT, 2)	/* (A12) UART1_TXD */
 		>;
 		bootph-all;
 	};
 
-	main_uart0_rx_pins_wakeup: main-uart0-rx-wakeup-pins {
+	main_uart4_pins_default: main-uart4-default-pins {
 		pinctrl-single,pins = <
-			AM62LX_IOPAD(0x01b4, PIN_INPUT | PIN_WKUP_EN, 0)	/* (D13) UART0_RXD */
+			AM62LX_IOPAD(0x00a8, PIN_INPUT, 2)	/* (G23) UART4_RXD */
+			AM62LX_IOPAD(0x00ac, PIN_OUTPUT, 2)	/* (G22) UART4_TXD */
 		>;
+		bootph-all;
 	};
 
-	main_uart1_pins_default: main-uart1-default-pins {
+	main_uart5_pins_default: main-uart5-default-pins {
 		pinctrl-single,pins = <
-			AM62LX_IOPAD(0x0180, PIN_INPUT, 2) /* (A8) MCASP0_AXR3.UART1_CTSn */
-			AM62LX_IOPAD(0x0184, PIN_OUTPUT, 2) /* (B10) MCASP0_AXR2.UART1_RTSn */
-			AM62LX_IOPAD(0x0198, PIN_INPUT, 2) /* (C11) MCASP0_AFSR.UART1_RXD */
-			AM62LX_IOPAD(0x019c, PIN_OUTPUT, 2) /* (A12) MCASP0_ACLKR.UART1_TXD */
+			AM62LX_IOPAD(0x01c4, PIN_INPUT, 1)	/* (B16) UART5_RXD */
+			AM62LX_IOPAD(0x01c8, PIN_OUTPUT, 1)	/* (B15) UART5_TXD */
 		>;
 		bootph-all;
 	};
@@ -289,10 +291,8 @@
 };
 
 &main_uart0 {
-	pinctrl-names = "default", "wakeup";
-	pinctrl-0 = <&main_uart0_tx_pins_default>, <&main_uart0_rx_pins_default>;
-	pinctrl-1 = <&main_uart0_tx_pins_default>, <&main_uart0_rx_pins_wakeup>;
-	wakeup-source  = <&system_deep_sleep>;
+	pinctrl-names = "default";
+	pinctrl-0 = <&main_uart0_pins_default>;
 	status = "okay";
 	bootph-all;
 };
