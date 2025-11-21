@@ -383,19 +383,41 @@
 	clock-frequency = <400000>;
 	bootph-all;
 
+    /*
+     * TODO: Delete later
+     */
 	eeprom@51 {
 		/* AT24C512C-MAHM-T or M24512-DFMC6TG */
 		compatible = "atmel,24c512";
 		reg = <0x51>;
 	};
+
+    /*
+     * TODO: Fuel Gauge, TH Sensor no linux driver support
+     */
+    eeprom@50 {
+        compatible = "atmel,24c32";
+        reg = <0x50>;
+    };
+
+    // IMU Sensor don't need interrupt pin, use ext_wakeup1
+	lsm6ds3@6a {
+		compatible = "st,lsm6ds3";
+		reg = <0x6a>;
+	};
 };
 
 &main_i2c1 {
+	symlink = "badge/quiic/i2c1", "badge/mikrobus/i2c", "badge/dsi/i2c";
 	status = "okay";
 	pinctrl-names = "default";
 	pinctrl-0 = <&main_i2c1_pins_default>;
 	clock-frequency = <100000>;
 	bootph-all;
+
+    /*
+     * TODO: i2c1 is used for touch screen in BeagleBadge, delete other later
+     */
 
 	exp1: gpio@22 {
 		compatible = "ti,tca6424";
@@ -454,10 +476,15 @@
 };
 
 &main_i2c2 {
+	symlink = "badge/quiic/i2c2";
 	status = "okay";
 	pinctrl-names = "default";
 	pinctrl-0 = <&main_i2c2_pins_default>;
 	clock-frequency = <400000>;
+
+    /*
+     * TODO: no Device in i2c2 in BeagleBadge, delete all later
+     */
 
 	typec_pd0: tps6598x@3f {
 		compatible = "ti,tps6598x";
