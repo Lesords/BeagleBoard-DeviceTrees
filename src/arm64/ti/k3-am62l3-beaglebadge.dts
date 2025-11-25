@@ -78,7 +78,7 @@
 		regulator-boot-on;
 		enable-active-high;
 		vin-supply = <&vcc_3v3_sys>;
-		gpio = <&exp1 3 GPIO_ACTIVE_HIGH>;
+		gpio = <&main_gpio0 16 GPIO_ACTIVE_HIGH>;
 	};
 
 	vcc_1v8: regulator-3 {
@@ -266,6 +266,13 @@
 		>;
 		bootph-all;
 	};
+    
+    main_mmc1_ldd_pins_default: main-mmc1-ldd-pins-default {
+        pinctrl-single,pins = <
+            AM62LX_IOPAD(0x007c, PIN_OUTPUT, 7) /* (LDD) MMC1_LDD */
+        >;
+		bootph-all;
+    };
 
 	rgmii1_pins_default: rgmii1-default-pins {
 		pinctrl-single,pins = <
@@ -468,11 +475,11 @@
 		pinctrl-0 = <&pmic_irq_pins_default>;
 		ti,power-button;
 
-		buck1-supply = <&vmain_pd>;
-		buck2-supply = <&vmain_pd>;
-		buck3-supply = <&vmain_pd>;
-		ldo1-supply = <&vmain_pd>;
-		ldo2-supply = <&vmain_pd>;
+		buck1-supply = <&vcc_3v3_sys>;
+		buck2-supply = <&vcc_3v3_sys>;
+		buck3-supply = <&vcc_3v3_sys>;
+		ldo1-supply = <&vcc_3v3_sys>;
+		ldo2-supply = <&vcc_3v3_sys>;
 
 		regulators {
 			buck1_reg: buck1 {
@@ -541,7 +548,7 @@
 	/* SD/MMC */
 	vmmc-supply = <&vdd_mmc1>;
 	pinctrl-names = "default";
-	pinctrl-0 = <&main_mmc1_pins_default>;
+	pinctrl-0 = <&main_mmc1_pins_default>, <&main_mmc1_ldd_pins_default>;
 	status = "okay";
 	bootph-all;
 	disable-wp;
