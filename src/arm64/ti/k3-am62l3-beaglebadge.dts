@@ -46,6 +46,43 @@
 		};
 	};
 
+	buttons {
+		compatible = "gpio-keys";
+		pinctrl-names = "default";
+		pinctrl-0 = <&button_pins_default>;
+        status = "okay";
+
+		left {
+			label = "GPIO Key Left";
+			gpios = <&main_gpio0 31 0>;
+			linux,code = <KEY_LEFT>;
+		};
+
+		right {
+			label = "GPIO Key Right";
+			gpios = <&main_gpio0 95 0>;
+			linux,code = <KEY_RIGHT>;
+		};
+
+		down {
+			label = "GPIO Key Down";
+			gpios = <&main_gpio0 42 0>;
+			linux,code = <KEY_DOWN>;
+		};
+
+		up {
+			label = "GPIO Key Up";
+			gpios = <&main_gpio0 32 0>;
+			linux,code = <KEY_UP>;
+		};
+
+		back {
+			label = "GPIO Key Back";
+			gpios = <&main_gpio0 104 0>;
+			linux,code = <KEY_BACK>;
+		};
+	};
+
 	vmain_pd: regulator-0 {
 		/* TPS65988 PD CONTROLLER OUTPUT */
 		bootph-all;
