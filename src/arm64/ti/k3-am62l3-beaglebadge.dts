@@ -605,18 +605,18 @@
 				reg = <0x6c0000 0x40000>;
 			};
 
-			partition@800000 {
-				label = "ospi.rootfs";
-				reg = <0x800000 0x37c0000>;
-			};
+            partition@700000 {
+                label = "ospi.rootfs";
+                reg = <0x700000 0x18c0000>;
+            };
 
-			partition@3fc0000 {
-				bootph-all;
-				label = "ospi.phypattern";
-				reg = <0x3fc0000 0x40000>;
-			};
-		};
-	};
+            partition@1fc0000 {
+                bootph-all;
+                label = "ospi.phypattern";
+                reg = <0x1fc0000 0x40000>;
+            };
+        };
+    };
 };
 
 &tscadc0 {
