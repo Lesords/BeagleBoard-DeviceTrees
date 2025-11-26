@@ -83,6 +83,20 @@
 		};
 	};
 
+	buzzer_pwm: buzzer-pwm {
+		#pwm-cells = <3>;
+		compatible = "pwm-gpio";
+		pinctrl-names = "default";
+		pinctrl-0 = <&buzzer_pins_default>;
+		gpios = <&main_gpio0 29 GPIO_ACTIVE_HIGH>;
+	};
+
+	badge-buzzer {
+        status = "disabled";
+		compatible = "pwm-beeper";
+		pwms = <&buzzer_pwm 0 50000 0>;
+	};
+
 	vmain_pd: regulator-0 {
 		/* TPS65988 PD CONTROLLER OUTPUT */
 		bootph-all;
@@ -258,7 +272,7 @@
 
     buzzer_pins_default: buzzer-default-pins {
         pinctrl-single,pins = <
-            AM62LX_IOPAD(0x00b0, PIN_OUTPUT, 4) /* (F22) Buzzer_PWM.GPIO0_29  */
+            AM62LX_IOPAD(0x00b0, PIN_OUTPUT, 7) /* (F22) Buzzer_PWM.GPIO0_29  */
         >;
     };
 
