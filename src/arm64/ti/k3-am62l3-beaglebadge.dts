@@ -97,6 +97,42 @@
 		pwms = <&buzzer_pwm 0 50000 0>;
 	};
 
+    red-led {
+        compatible = "pwm-leds";
+        pinctrl-names = "default";
+        pinctrl-0 = <&red_led_pins_default>;
+
+        led-red {
+            label = "rgb:red";
+            pwms = <&ecap2 0 1000000 0>;
+            max-brightness = <255>;
+        };
+    };
+
+    green-led {
+        compatible = "pwm-leds";
+        pinctrl-names = "default";
+        pinctrl-0 = <&green_led_pins_default>;
+
+        led-green {
+            label = "rgb:green";
+            pwms = <&epwm1 0 1000000 0>;
+            max-brightness = <255>;
+        };
+    };
+
+    blue-led {
+        compatible = "pwm-leds";
+        pinctrl-names = "default";
+        pinctrl-0 = <&blue_led_pins_default>;
+
+        led-blue {
+            label = "rgb:blue";
+            pwms = <&epwm1 1 1000000 0>;
+            max-brightness = <255>;
+        };
+    };
+
 	vmain_pd: regulator-0 {
 		/* TPS65988 PD CONTROLLER OUTPUT */
 		bootph-all;
@@ -282,9 +318,14 @@
         >;
     };
 
-    rgb_led_pins_default: rgb-led-default-pins {
+    green_led_pins_default: green-led-default-pins {
         pinctrl-single,pins = <
             AM62LX_IOPAD(0x0188, PIN_OUTPUT, 5) /* (A9)  GREEN.GPIO0_81 */
+        >;
+    };
+
+    blue_led_pins_default: blue-led-default-pins {
+        pinctrl-single,pins = <
             AM62LX_IOPAD(0x018c, PIN_OUTPUT, 5) /* (B9)  BLUE.GPIO0_82  */
         >;
     };
@@ -676,6 +717,14 @@
 	adc {
 		ti,adc-channels = <0 1 2 3>;
 	};
+};
+
+&epwm1 {
+	status = "okay";
+};
+
+&ecap2 {
+    status = "okay";
 };
 
 &usbss0 {
