@@ -32,17 +32,91 @@
 		bootph-all;
 	};
 
-	leds {
+	led_matrix: led-matrix {
 		compatible = "gpio-leds";
-		pinctrl-names = "default";
-		pinctrl-0 = <&usr_led_pins_default>;
 
-		led-0 {
-			label = "am62-sk:green:heartbeat";
-			gpios = <&main_gpio0 123 GPIO_ACTIVE_HIGH>;
-			linux,default-trigger = "heartbeat";
-			function = LED_FUNCTION_HEARTBEAT;
-			default-state = "on";
+		led-1-a {
+			label = "badge:matrix:led1_a";
+			gpios = <&led_gpio 0 GPIO_ACTIVE_LOW>;
+			default-state = "off";
+		};
+
+		led-1-b {
+			label = "badge:matrix:led1_b";
+			gpios = <&led_gpio 1 GPIO_ACTIVE_LOW>;
+			default-state = "off";
+		};
+
+		led-1-c {
+			label = "badge:matrix:led1_c";
+			gpios = <&led_gpio 2 GPIO_ACTIVE_LOW>;
+			default-state = "off";
+		};
+
+		led-1-d {
+			label = "badge:matrix:led1_d";
+			gpios = <&led_gpio 3 GPIO_ACTIVE_LOW>;
+			default-state = "off";
+		};
+
+		led-1-e {
+			label = "badge:matrix:led1_e";
+			gpios = <&led_gpio 4 GPIO_ACTIVE_LOW>;
+			default-state = "off";
+		};
+
+		led-1-f {
+			label = "badge:matrix:led1_f";
+			gpios = <&led_gpio 5 GPIO_ACTIVE_LOW>;
+			default-state = "off";
+		};
+
+		led-1-g {
+			label = "badge:matrix:led1_g";
+			gpios = <&led_gpio 6 GPIO_ACTIVE_LOW>;
+			default-state = "off";
+		};
+
+		led-2-a {
+			label = "badge:matrix:led2_a";
+			gpios = <&led_gpio 8 GPIO_ACTIVE_LOW>;
+			default-state = "off";
+		};
+
+		led-2-b {
+			label = "badge:matrix:led2_b";
+			gpios = <&led_gpio 9 GPIO_ACTIVE_LOW>;
+			default-state = "off";
+		};
+
+		led-2-c {
+			label = "badge:matrix:led2_c";
+			gpios = <&led_gpio 10 GPIO_ACTIVE_LOW>;
+			default-state = "off";
+		};
+
+		led-2-d {
+			label = "badge:matrix:led2_d";
+			gpios = <&led_gpio 11 GPIO_ACTIVE_LOW>;
+			default-state = "off";
+		};
+
+		led-2-e {
+			label = "badge:matrix:led2_e";
+			gpios = <&led_gpio 12 GPIO_ACTIVE_LOW>;
+			default-state = "off";
+		};
+
+		led-2-f {
+			label = "badge:matrix:led2_f";
+			gpios = <&led_gpio 13 GPIO_ACTIVE_LOW>;
+			default-state = "off";
+		};
+
+		led-2-g {
+			label = "badge:matrix:led2_g";
+			gpios = <&led_gpio 14 GPIO_ACTIVE_LOW>;
+			default-state = "off";
 		};
 	};
 
