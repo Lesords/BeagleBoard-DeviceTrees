@@ -155,6 +155,12 @@
 			gpios = <&main_gpio0 104 0>;
 			linux,code = <KEY_BACK>;
 		};
+
+		select {
+			label = "GPIO Key Select";
+			gpios = <&main_gpio0 26 0>;
+			linux,code = <KEY_SELECT>;
+		};
 	};
 
 	buzzer_pwm: buzzer-pwm {
@@ -365,11 +371,12 @@
 
     button_pins_default: button-default-pins {
         pinctrl-single,pins = <
-            AM62LX_IOPAD(0x00b8, PIN_INPUT, 7) /* (L21) Left.GPIO0_31  */
-            AM62LX_IOPAD(0x01c0, PIN_INPUT, 7) /* (B13) Right.GPIO0_95 */
-            AM62LX_IOPAD(0x00e8, PIN_INPUT, 7) /* (L19) Down.GPIO0_42  */
-            AM62LX_IOPAD(0x00c0, PIN_INPUT, 7) /* (N19) Up.GPIO0_32    */
-            AM62LX_IOPAD(0x01e4, PIN_INPUT, 7) /* (D16) Back.GPIO0_104 */
+            AM62LX_IOPAD(0x00b8, PIN_INPUT, 7) /* (L21) Left.GPIO0_31   */
+            AM62LX_IOPAD(0x01c0, PIN_INPUT, 7) /* (B13) Right.GPIO0_95  */
+            AM62LX_IOPAD(0x00e8, PIN_INPUT, 7) /* (L19) Down.GPIO0_42   */
+            AM62LX_IOPAD(0x00c0, PIN_INPUT, 7) /* (N19) Up.GPIO0_32     */
+            AM62LX_IOPAD(0x01e4, PIN_INPUT, 7) /* (D16) Back.GPIO0_104  */
+            AM62LX_IOPAD(0x00a4, PIN_INPUT, 7) /* (H18) Select.GPIO0_26 */
         >;
     };
 
