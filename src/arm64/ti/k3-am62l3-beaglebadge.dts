@@ -19,6 +19,7 @@
 	aliases {
 		mmc0 = &sdhci0;
 		mmc1 = &sdhci1;
+		mmc2 = &sdhci2;
 		serial0 = &main_uart0;
 		serial3 = &main_uart1;
 		serial4 = &main_uart4;
@@ -269,6 +270,18 @@
 		regulator-always-on;
 		regulator-boot-on;
 	};
+
+	wifi_pwrseq: wifi-pwrseq {
+		compatible = "mmc-pwrseq-simple";
+		pinctrl-names = "default";
+		pinctrl-0 = <&wkup_clkout_pins_default>, <&main_wlirq_pins_default>,
+			<&wl_logger_pins_default>, <&wkup_ble_irq_pins_default>,
+			<&wifi_en_pins_default>;
+		post-power-on-delay-ms = <500>;
+		power-off-delay-us = <200>;
+		clocks = <&scmi_clk 471>;
+		clock-names = "ext_clock";
+	};
 };
 
 &pmx0 {
@@ -332,7 +345,6 @@
 		pinctrl-single,pins = <
 			AM62LX_IOPAD(0x003c, PIN_OUTPUT, 0) /* (D22) OSPI0_CLK */
 			AM62LX_IOPAD(0x0068, PIN_OUTPUT, 0) /* (C20) OSPI0_CSn0 */
-			AM62LX_IOPAD(0x0074, PIN_OUTPUT, 0) /* (C23) OSPI0_CSn3 */
 			AM62LX_IOPAD(0x0048, PIN_INPUT, 0) /* (C22) OSPI0_D0 */
 			AM62LX_IOPAD(0x004c, PIN_INPUT, 0) /* (D21) OSPI0_D1 */
 			AM62LX_IOPAD(0x0050, PIN_INPUT, 0) /* (E23) OSPI0_D2 */
@@ -478,6 +490,48 @@
 		bootph-all;
     };
 
+	main_mmc2_pins_default: main-mmc2-default-pins {
+		pinctrl-single,pins = <
+			AM62LX_IOPAD(0x010c, PIN_INPUT_PULLUP, 0)  /* (U23) MMC2_CMD */
+			AM62LX_IOPAD(0x0104, PIN_OUTPUT, 0) /* (R23) MMC2_CLK */
+			AM62LX_IOPAD(0x0108, PIN_INPUT, 0) /* () MMC2_CLKLB */
+			AM62LX_IOPAD(0x0100, PIN_INPUT_PULLUP, 0)  /* (U22) MMC2_DAT0 */
+			AM62LX_IOPAD(0x00fc, PIN_INPUT_PULLUP, 0)  /* (T22) MMC2_DAT1 */
+			AM62LX_IOPAD(0x00f8, PIN_INPUT_PULLUP, 0)  /* (T23) MMC2_DAT2 */
+			AM62LX_IOPAD(0x00f4, PIN_INPUT_PULLUP, 0)  /* (R22) MMC2_DAT3 */
+		>;
+	};
+
+    wifi_en_pins_default: wifi-en-default-pins {
+        pinctrl-single,pins = <
+            AM62LX_IOPAD(0x0110, PIN_OUTPUT, 7) /* (T20) WIFI_EN.GPIO0_51 */
+        >;
+    };
+
+	main_wlirq_pins_default: main-wlirq-pins-default {
+		pinctrl-single,pins = <
+			AM62LX_IOPAD(0x0114, PIN_INPUT_PULLDOWN, 7)    /* (T21) IRQ_WL.GPIO0_52 */
+		>;
+	};
+
+	wl_logger_pins_default: wl-logger-default-pins {
+		pinctrl-single,pins = <
+			AM62LX_IOPAD(0x0074, PIN_INPUT, 7) /* (C23) OSPI0_CSn3.GPIO0_14 */
+		>;
+	};
+
+	wkup_ble_irq_pins_default: wkup-ble-irq-default-pins {
+		pinctrl-single,pins = <
+			AM62LX_IOPAD(0x0008, PIN_INPUT_PULLDOWN, 7) /* WKUP_GPIO0_2 */
+		>;
+	};
+
+    wkup_clkout_pins_default: wkup-clkout-default-pins {
+        pinctrl-single,pins = <
+            AM62LX_IOPAD(0x0018, PIN_OUTPUT, 0) /* (Y23) WKUP_CLKOUT */
+        >;
+    };
+    
 	others_gpio_pins_default: others-gpio-default-pins {
 		pinctrl-single,pins = <
 			AM62LX_IOPAD(0x0138, PIN_OUTPUT, 7) /* (Y8) RGMII1_RD0 */
@@ -765,6 +819,37 @@
 	status = "okay";
 	bootph-all;
 	disable-wp;
+};
+
+&sdhci2 {
+	compatible = "ti,j721e-sdhci-4bit";
+	bootph-all;
+	vmmc-supply = <&vcc_3v3_sys>;
+	vqmmc-supply = <&vcc_1v8>;
+	mmc-pwrseq = <&wifi_pwrseq>;
+	pinctrl-names = "default";
+	pinctrl-0 = <&main_mmc2_pins_default>;
+	bus-width = <4>;
+	non-removable;
+	ti,fails-without-test-cd;
+	cap-power-off-card;
+	keep-power-in-suspend;
+	ti,driver-strength-ohm = <33>;
+
+	assigned-clocks = <&scmi_clk 471>;
+	assigned-clock-parents = <&scmi_clk 468>;
+	assigned-clock-rates = <32768>;
+
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "okay";
+
+	wlcore: wlcore@2 {
+		compatible = "ti,cc3300";
+		reg = <2>;
+		interrupt-parent = <&main_gpio0>;
+		interrupts = <52 IRQ_TYPE_EDGE_RISING>;
+	};
 };
 
 &ospi0 {
