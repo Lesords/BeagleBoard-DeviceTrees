@@ -19,7 +19,10 @@
 	aliases {
 		mmc0 = &sdhci0;
 		mmc1 = &sdhci1;
+		serial0 = &main_uart0;
 		serial3 = &main_uart1;
+		serial4 = &main_uart4;
+		serial5 = &main_uart5;
 	};
 
 	chosen {
@@ -511,6 +514,20 @@
 &main_uart1 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&main_uart1_pins_default>;
+	status = "okay";
+	bootph-all;
+};
+
+&main_uart4 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&main_uart4_pins_default>;
+	status = "okay";
+	bootph-all;
+};
+
+&main_uart5 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&main_uart5_pins_default>;
 	status = "okay";
 	bootph-all;
 };
