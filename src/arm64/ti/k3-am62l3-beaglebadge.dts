@@ -610,10 +610,11 @@
         reg = <0x50>;
     };
 
-    // IMU Sensor don't need interrupt pin, use ext_wakeup1
 	lsm6ds3@6a {
-		compatible = "st,lsm6ds3";
+		compatible = "st,lsm6ds3tr-c";
 		reg = <0x6a>;
+        vdd-supply = <&vcc_3v3_sys>;
+        vddio-supply = <&vcc_3v3_sys>;
 	};
 };
 
