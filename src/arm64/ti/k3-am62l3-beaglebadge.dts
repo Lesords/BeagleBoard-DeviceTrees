@@ -534,7 +534,7 @@
      * TODO: ePaper Conn
      */
     spidev@0 {
-        compatible = "spidev";
+        compatible = "rohm,dh2228fv";
         reg = <0>;
         #address-cells = <1>;
         #size-cells = <0>;
@@ -568,7 +568,7 @@
     };
 
     spidev@1 {
-        compatible = "spidev";
+        compatible = "rohm,dh2228fv";
         reg = <1>;
         spi-max-frequency = <125000000>;
         symlink = "spi/1.1";
@@ -585,7 +585,7 @@
 	ti,spi-num-cs = <1>;
 
     spidev@0 {
-        compatible = "spidev";
+        compatible = "rohm,dh2228fv";
         reg = <0>;
         #address-cells = <1>;
         #size-cells = <0>;
