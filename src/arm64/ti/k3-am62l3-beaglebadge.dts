@@ -360,11 +360,20 @@
 	main_spi3_pins_default: main-spi3-default-pins {
 		pinctrl-single,pins = <
 			AM62LX_IOPAD(0x00d0, PIN_OUTPUT, 5) /* (P22) SPI3_CLK */
-			AM62LX_IOPAD(0x00d4, PIN_OUTPUT, 5) /* (N23) SPI3_D0 */
+			AM62LX_IOPAD(0x00d4, PIN_INPUT, 5) /* (N23) SPI3_D0 */
 			AM62LX_IOPAD(0x00d8, PIN_OUTPUT, 5) /* (N22) SPI3_D1 */
 			AM62LX_IOPAD(0x00cc, PIN_OUTPUT, 5) /* (P23) SPI3_CS0 */
 		>;
 	};
+
+    lora_pins_default: lora-default-pins {
+        pinctrl-single,pins = <
+            AM62LX_IOPAD(0x00e4, PIN_OUTPUT, 7) /* (L20) RF_SW1.GPIO0_41  */
+            AM62LX_IOPAD(0x00c8, PIN_OUTPUT, 7) /* (M19) NRST.GPIO0_34    */
+            AM62LX_IOPAD(0x01a4, PIN_INPUT, 7)  /* (D11) BUSY.GPIO0_88    */
+            AM62LX_IOPAD(0x01bc, PIN_INPUT, 7)  /* (B14) DIO.GPIO0_94     */
+        >;
+    };
 
 	usr_led_pins_default: usr-led-default-pins {
 		pinctrl-single,pins = <
@@ -583,6 +592,7 @@
 	#address-cells = <1>;
 	#size-cells = <0>;
 	ti,spi-num-cs = <1>;
+    ti,pindir-d1-out-d0-in;
 
     spidev@0 {
         compatible = "rohm,dh2228fv";
@@ -703,7 +713,7 @@
 	status = "okay";
 	bootph-all;
 	pinctrl-names = "default";
-	pinctrl-0 = <&others_gpio_pins_default>;
+	pinctrl-0 = <&others_gpio_pins_default>, <&lora_pins_default>;
 };
 
 &main_gpio2 {
