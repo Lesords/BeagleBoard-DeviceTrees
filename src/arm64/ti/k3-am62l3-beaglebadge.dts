@@ -533,6 +533,7 @@
 };
 
 &main_uart5 {
+	symlink = "badge/mikrobus/uart";
 	pinctrl-names = "default";
 	pinctrl-0 = <&main_uart5_pins_default>;
 	status = "okay";
