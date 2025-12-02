@@ -166,6 +166,14 @@
 		};
 	};
 
+	mikrobus-pwm {
+		#pwm-cells = <3>;
+		compatible = "pwm-gpio";
+		pinctrl-names = "default";
+		pinctrl-0 = <&mikrobus_pwm_pins_default>;
+		gpios = <&main_gpio0 33 GPIO_ACTIVE_HIGH>;
+	};
+
 	buzzer_pwm: buzzer-pwm {
 		#pwm-cells = <3>;
 		compatible = "pwm-gpio";
@@ -405,6 +413,17 @@
         >;
     };
 
+    mikrobus_pwm_pins_default: mikrobus-pwm-default-pins {
+        pinctrl-single,pins = <
+            AM62LX_IOPAD(0x00c4, PIN_OUTPUT, 7) /* (N20) Mikrobus_PWM.GPIO0_33  */
+        >;
+    };
+
+    mikrobus_rst_pins_default: mikrobus-rst-default-pins {
+        pinctrl-single,pins = <
+			AM62LX_IOPAD(0x0194, PIN_OUTPUT, 7) /* (B11) Mikrobus_RST.RST */
+        >;
+    };
     red_led_pins_default: red-led-default-pins {
         pinctrl-single,pins = <
             AM62LX_IOPAD(0x0190, PIN_OUTPUT, 2) /* (A11) RED.GPIO0_83   */
@@ -721,7 +740,7 @@
 	status = "okay";
 	bootph-all;
 	pinctrl-names = "default";
-	pinctrl-0 = <&others_gpio_pins_default>, <&lora_pins_default>, <&main_spi0_other_pins>;
+	pinctrl-0 = <&others_gpio_pins_default>, <&lora_pins_default>, <&main_spi0_other_pins>, <&mikrobus_rst_pins_default>;
 };
 
 &main_gpio2 {
