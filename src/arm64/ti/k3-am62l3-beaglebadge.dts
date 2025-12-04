@@ -277,6 +277,7 @@
 		pinctrl-0 = <&wkup_clkout_pins_default>, <&main_wlirq_pins_default>,
 			<&wl_logger_pins_default>, <&wkup_ble_irq_pins_default>,
 			<&wifi_en_pins_default>;
+		reset-gpios = <&main_gpio0 51 GPIO_ACTIVE_LOW>;
 		post-power-on-delay-ms = <500>;
 		power-off-delay-us = <200>;
 		clocks = <&scmi_clk 471>;
@@ -834,7 +835,7 @@
 	ti,fails-without-test-cd;
 	cap-power-off-card;
 	keep-power-in-suspend;
-	ti,driver-strength-ohm = <33>;
+	ti,driver-strength-ohm = <50>;
 
 	assigned-clocks = <&scmi_clk 471>;
 	assigned-clock-parents = <&scmi_clk 468>;
