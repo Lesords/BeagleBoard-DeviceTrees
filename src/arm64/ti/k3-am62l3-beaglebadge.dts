@@ -298,6 +298,8 @@
 		pinctrl-single,pins = <
 			AM62LX_IOPAD(0x0198, PIN_INPUT, 2)	/* (C11) UART1_RXD */
 			AM62LX_IOPAD(0x019c, PIN_OUTPUT, 2)	/* (A12) UART1_TXD */
+			AM62LX_IOPAD(0x0180, PIN_INPUT, 2)	/* (A8) UART1_CTSn */
+			AM62LX_IOPAD(0x0184, PIN_OUTPUT, 2)	/* (B10) UART1_RTSn */
 		>;
 		bootph-all;
 	};
@@ -597,6 +599,12 @@
 	pinctrl-0 = <&main_uart1_pins_default>;
 	status = "okay";
 	bootph-all;
+
+	bluetooth {
+		compatible = "ti,cc33xx-bt";
+		cc33xx-supply = <&vcc_3v3_sys>;
+		max-speed = <115200>;
+	};
 };
 
 &main_uart4 {
