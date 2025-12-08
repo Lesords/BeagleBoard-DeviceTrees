@@ -357,7 +357,6 @@
 			AM62LX_IOPAD(0x0060, PIN_INPUT, 0) /* (G20) OSPI0_D6 */
 			AM62LX_IOPAD(0x0064, PIN_INPUT, 0) /* (F20) OSPI0_D7 */
 			AM62LX_IOPAD(0x0044, PIN_INPUT, 0) /* (E22) OSPI0_DQS */
-			AM62LX_IOPAD(0x0040, PIN_INPUT, 0) /* (E18) OSPI0_LBCLKO */
 		>;
 	};
 
@@ -469,6 +468,13 @@
 			AM62LX_IOPAD(0x01f4, PIN_INPUT_PULLUP, 0) /* (B3) MMC0_DAT5 */
 			AM62LX_IOPAD(0x01f0, PIN_INPUT_PULLUP, 0) /* (A3) MMC0_DAT6 */
 			AM62LX_IOPAD(0x01ec, PIN_INPUT_PULLUP, 0) /* (B4) MMC0_DAT7 */
+		>;
+		bootph-all;
+	};
+
+	main_mmc0_rst_pins_default: main-mmc0-rst-pins-default {
+		pinctrl-single,pins = <
+			AM62LX_IOPAD(0x0040, PIN_OUTPUT, 7) /* (E18) OSPI0_LBCLKO.GPIO0_1 */
 		>;
 		bootph-all;
 	};
@@ -815,7 +821,8 @@
 	/* eMMC */
 	non-removable;
 	pinctrl-names = "default";
-	pinctrl-0 = <&main_mmc0_pins_default>;
+	pinctrl-0 = <&main_mmc0_pins_default>, <&main_mmc0_rst_pins_default>;
+	reset-gpios = <&main_gpio0 1 GPIO_ACTIVE_LOW>;
 	status = "okay";
 	bootph-all;
 };
