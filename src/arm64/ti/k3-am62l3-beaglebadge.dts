@@ -603,6 +603,12 @@
 			AM62LX_IOPAD(0x0014, PIN_INPUT_PULLUP, 0) /* (AA22) WKUP_I2C0_SDA */
 		>;
 	};
+
+    wkup_gpio0_pins_default: wkup-gpio0-default-pins {
+        pinctrl-single,pins = <
+            AM62LX_IOPAD(0x0004, PIN_OUTPUT, 7) /* (AA23) WKUP_GPIO0_1 */
+        >;
+	};
 };
 
 &main_uart0 {
@@ -827,6 +833,13 @@
 &main_gpio2 {
 	status = "okay";
 	bootph-all;
+};
+
+&wkup_gpio0 {
+    status = "okay";
+    bootph-all;
+	pinctrl-names = "default";
+	pinctrl-0 = <&wkup_gpio0_pins_default>;
 };
 
 &sdhci0 {
