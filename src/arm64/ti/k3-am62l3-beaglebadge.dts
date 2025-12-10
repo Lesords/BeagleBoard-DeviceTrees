@@ -966,6 +966,10 @@
 	};
 };
 
+&cpsw3g {
+    status = "disabled";
+};
+
 &epwm1 {
 	status = "okay";
 };
