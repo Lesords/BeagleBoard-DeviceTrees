@@ -271,7 +271,7 @@
         compatible = "mmc-pwrseq-simple";
         pinctrl-names = "default";
         pinctrl-0 = <&wkup_clkout_pins_default>, <&main_wlirq_pins_default>,
-            <&wl_logger_pins_default>, <&wkup_ble_irq_pins_default>,
+            <&wkup_ble_irq_pins_default>,
                 <&wifi_en_pins_default>;
                 reset-gpios = <&main_gpio0 51 GPIO_ACTIVE_LOW>;
                 post-power-on-delay-ms = <500>;
@@ -499,13 +499,6 @@
         bootph-all;
     };
 
-    main_mmc0_rst_pins_default: main-mmc0-rst-pins-default {
-        pinctrl-single,pins = <
-            AM62LX_IOPAD(0x0040, PIN_OUTPUT, 7) /* (E18) OSPI0_LBCLKO.GPIO0_1 */
-        >;
-        bootph-all;
-    };
-
     main_mmc1_pins_default: main-mmc1-default-pins {
         pinctrl-single,pins = <
             AM62LX_IOPAD(0x0230, PIN_INPUT, 0) /* (Y3) MMC1_CMD */
@@ -552,7 +545,7 @@
 
     wl_logger_pins_default: wl-logger-default-pins {
         pinctrl-single,pins = <
-            AM62LX_IOPAD(0x0074, PIN_INPUT, 7) /* (C23) OSPI0_CSn3.GPIO0_14 */
+            /* AM62LX_IOPAD(0x0074, PIN_INPUT, 7) (C23) OSPI0_CSn3.GPIO0_14 */
         >;
     };
 
@@ -882,8 +875,7 @@
     /* eMMC */
     non-removable;
     pinctrl-names = "default";
-    pinctrl-0 = <&main_mmc0_pins_default>, <&main_mmc0_rst_pins_default>;
-    reset-gpios = <&main_gpio0 1 GPIO_ACTIVE_LOW>;
+    pinctrl-0 = <&main_mmc0_pins_default>;
     status = "okay";
     bootph-all;
 };
