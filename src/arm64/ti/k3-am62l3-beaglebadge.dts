@@ -226,7 +226,6 @@
     };
 
 	vmain_pd: regulator-0 {
-		/* TPS65988 PD CONTROLLER OUTPUT */
 		bootph-all;
 		compatible = "regulator-fixed";
 		regulator-name = "vmain_pd";
@@ -237,7 +236,6 @@
 	};
 
 	vcc_3v3_sys: regulator-1 {
-		/* output of LM61460-Q1 */
 		compatible = "regulator-fixed";
 		regulator-name = "vcc_3v3_sys";
 		regulator-min-microvolt = <3300000>;
@@ -248,7 +246,6 @@
 	};
 
 	vdd_mmc1: regulator-2 {
-		/* TPS22918DBVR */
 		bootph-all;
 		compatible = "regulator-fixed";
 		regulator-name = "vdd_mmc1";
@@ -261,7 +258,6 @@
 	};
 
 	vcc_1v8: regulator-3 {
-		/* output of TPS6282518DMQ */
 		compatible = "regulator-fixed";
 		regulator-name = "vcc_1v8";
 		regulator-min-microvolt = <1800000>;
@@ -653,9 +649,6 @@
 	#address-cells = <1>;
 	#size-cells = <0>;
 
-    /*
-     * TODO: ePaper Conn
-     */
     spidev@0 {
         compatible = "rohm,dh2228fv";
         reg = <0>;
@@ -726,9 +719,6 @@
 	clock-frequency = <400000>;
 	bootph-all;
 
-    /*
-     * TODO: Fuel Gauge, TH Sensor no linux driver support
-     */
     eeprom@50 {
         compatible = "atmel,24c32";
         reg = <0x50>;
