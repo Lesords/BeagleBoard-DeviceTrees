@@ -379,7 +379,7 @@
     main_spi0_other_pins: main-spi0-other-pins {
         pinctrl-single,pins = <
             AM62LX_IOPAD(0x01ac, PIN_OUTPUT, 7) /* (E12) D/C#.GPIO0_90 */
-            AM62LX_IOPAD(0x00dc, PIN_OUTPUT, 7) /* (N21) BUSY.GPIO0_39 */
+            AM62LX_IOPAD(0x00dc, PIN_INPUT, 7) /* (N21) BUSY.GPIO0_39 */
             AM62LX_IOPAD(0x009c, PIN_OUTPUT, 7) /* (H20) RES#.GPIO0_24 */
         >;
     };
