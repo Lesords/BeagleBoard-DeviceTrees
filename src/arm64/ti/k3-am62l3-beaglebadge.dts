@@ -580,6 +580,7 @@
             AM62LX_IOPAD(0x0148, PIN_OUTPUT, 7) /* (AC13) MDIO0_MDIO */
 
             AM62LX_IOPAD(0x00ec, PIN_OUTPUT, 7) /* (M23) GPIO0_43 */
+            AM62LX_IOPAD(0x0078, PIN_OUTPUT, 7) /* (L22) GPIO0_15 */
         >;
     };
 
