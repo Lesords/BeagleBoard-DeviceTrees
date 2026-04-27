@@ -387,7 +387,7 @@
     main_spi1_pins_default: main-spi1-default-pins {
         pinctrl-single,pins = <
             AM62LX_IOPAD(0x008c, PIN_OUTPUT, 4) /* (H22) SPI1_CLK */
-            AM62LX_IOPAD(0x0080, PIN_OUTPUT, 4) /* (K22) SPI1_D0 */
+            AM62LX_IOPAD(0x0080, PIN_INPUT, 4) /* (K22) SPI1_D0 */
             AM62LX_IOPAD(0x0084, PIN_OUTPUT, 4) /* (J23) SPI1_D1 */
             AM62LX_IOPAD(0x0088, PIN_OUTPUT, 4) /* (K23) SPI1_CS0 */
             AM62LX_IOPAD(0x0094, PIN_OUTPUT, 4) /* (J22) SPI1_CS1 */
