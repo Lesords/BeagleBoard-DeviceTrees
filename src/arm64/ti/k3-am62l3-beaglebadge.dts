@@ -267,6 +267,18 @@
         regulator-boot-on;
     };
 
+    wifi_3v3: regulator-wifi-3v3 {
+        compatible = "regulator-fixed";
+        regulator-name = "wifi_3v3";
+        regulator-min-microvolt = <3300000>;
+        regulator-max-microvolt = <3300000>;
+        vin-supply = <&vcc_3v3_sys>;
+        enable-active-high;
+        gpio = <&main_gpio0 75 GPIO_ACTIVE_HIGH>;
+        pinctrl-names = "default";
+        pinctrl-0 = <&wifi_pwr_pins_default>;
+    };
+
     wifi_pwrseq: wifi-pwrseq {
         compatible = "mmc-pwrseq-simple";
         pinctrl-names = "default";
@@ -537,6 +549,12 @@
         >;
     };
 
+    wifi_pwr_pins_default: wifi-pwr-default-pins {
+        pinctrl-single,pins = <
+            AM62LX_IOPAD(0x0170, PIN_OUTPUT, 7) /* (AB9) WIFI_PWR_EN.GPIO0_75 */
+        >;
+    };
+
     main_wlirq_pins_default: main-wlirq-pins-default {
         pinctrl-single,pins = <
             AM62LX_IOPAD(0x0114, PIN_INPUT_PULLDOWN, 7)    /* (T21) IRQ_WL.GPIO0_52 */
@@ -576,7 +594,6 @@
             AM62LX_IOPAD(0x011c, PIN_OUTPUT, 7) /* (W11) RGMII1_TXC */
             AM62LX_IOPAD(0x0118, PIN_OUTPUT, 7) /* (AB11) RGMII1_TX_CTL */
 
-            AM62LX_IOPAD(0x0170, PIN_OUTPUT, 7) /* (AB9) RGMII2_RD0 */
             AM62LX_IOPAD(0x0174, PIN_OUTPUT, 7) /* (AC9) RGMII2_RD1 */
             AM62LX_IOPAD(0x0178, PIN_OUTPUT, 7) /* (AB10) RGMII2_RD2 */
             AM62LX_IOPAD(0x017c, PIN_OUTPUT, 7) /* (AB8) RGMII2_RD3 */
@@ -637,7 +654,7 @@
 
     bluetooth {
         compatible = "ti,cc33xx-bt";
-        cc33xx-supply = <&vcc_3v3_sys>;
+        cc33xx-supply = <&wifi_3v3>;
         max-speed = <115200>;
     };
 };
@@ -893,7 +910,7 @@
 &sdhci2 {
     compatible = "ti,j721e-sdhci-4bit";
     bootph-all;
-    vmmc-supply = <&vcc_3v3_sys>;
+    vmmc-supply = <&wifi_3v3>;
     vqmmc-supply = <&vcc_1v8>;
     mmc-pwrseq = <&wifi_pwrseq>;
     pinctrl-names = "default";
