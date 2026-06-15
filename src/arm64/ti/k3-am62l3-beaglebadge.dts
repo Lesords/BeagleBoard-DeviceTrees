@@ -622,7 +622,9 @@
 
     wkup_gpio0_pins_default: wkup-gpio0-default-pins {
         pinctrl-single,pins = <
+            AM62LX_IOPAD(0x0000, PIN_OUTPUT, 7) /* (Y22)  WKUP_GPIO0_0 */
             AM62LX_IOPAD(0x0004, PIN_OUTPUT, 7) /* (AA23) WKUP_GPIO0_1 */
+            AM62LX_IOPAD(0x000C, PIN_OUTPUT, 7) /* (W22)  WKUP_GPIO0_3 */
         >;
     };
 };
